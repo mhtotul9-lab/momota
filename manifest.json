@@ -1,0 +1,16 @@
+{
+  "name": "Mamata (মমতা) — প্যারেন্টিং ও বেবি প্রোডাক্ট",
+  "short_name": "Mamata",
+  "description": "বাংলাদেশের বাবা-মায়েদের জন্য চাইল্ডকেয়ার তথ্য, কমিউনিটি এবং বেবি প্রোডাক্ট প্ল্যাটফর্ম।",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FBF5EC",
+  "theme_color": "#C9707C",
+  "orientation": "portrait",
+  "lang": "bn",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

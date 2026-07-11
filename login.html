@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>লগইন — Mamata (মমতা)</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#C9707C">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="login">
+
+<div id="site-header"></div>
+
+<section class="section" style="padding-top:50px;">
+  <div class="container" style="max-width:420px;">
+    <div class="card" style="padding:34px;">
+      <div class="flex gap-10 mt-8" style="margin-bottom:24px;">
+        <button class="btn btn-sm btn-primary" style="flex:1;" id="tabLoginBtn" onclick="showAuthTab('login')">লগইন</button>
+        <button class="btn btn-sm btn-ghost" style="flex:1;" id="tabSignupBtn" onclick="showAuthTab('signup')">সাইনআপ</button>
+      </div>
+
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="field"><label>ইমেইল</label><input id="liEmail" type="email" required placeholder="you@example.com"></div>
+        <div class="field"><label>পাসওয়ার্ড</label><input id="liPassword" type="password" required placeholder="••••••••"></div>
+        <button class="btn btn-primary btn-block" id="liBtn" type="submit">লগইন করুন</button>
+      </form>
+
+      <form id="signupForm" onsubmit="handleSignup(event)" style="display:none;">
+        <div class="field"><label>পুরো নাম</label><input id="suName" required placeholder="আপনার নাম"></div>
+        <div class="field"><label>ইমেইল</label><input id="suEmail" type="email" required placeholder="you@example.com"></div>
+        <div class="field"><label>মোবাইল নম্বর</label><input id="suPhone" placeholder="01XXXXXXXXX"></div>
+        <div class="field"><label>পাসওয়ার্ড</label><input id="suPassword" type="password" required minlength="6" placeholder="কমপক্ষে ৬ অক্ষর"></div>
+        <button class="btn btn-primary btn-block" id="suBtn" type="submit">অ্যাকাউন্ট তৈরি করুন</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/firebase-init.js"></script>
+<script src="js/app.js"></script>
+<script src="js/chat.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/auth.js"></script>
+<script>
+  function showAuthTab(tab) {
+    document.getElementById("loginForm").style.display = tab === "login" ? "block" : "none";
+    document.getElementById("signupForm").style.display = tab === "signup" ? "block" : "none";
+    document.getElementById("tabLoginBtn").className = "btn btn-sm " + (tab === "login" ? "btn-primary" : "btn-ghost");
+    document.getElementById("tabSignupBtn").className = "btn btn-sm " + (tab === "signup" ? "btn-primary" : "btn-ghost");
+  }
+</script>
+</body>
+</html>

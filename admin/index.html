@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>অ্যাডমিন ড্যাশবোর্ড — Mamata (মমতা)</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+  body{background:var(--cream-deep);}
+  .admin-shell{display:flex;min-height:100vh;}
+  .admin-sidebar{width:230px;background:var(--plum);color:#EFE3DA;padding:24px 0;flex-shrink:0;}
+  .admin-sidebar .logo{color:#fff;padding:0 22px 24px;font-size:1.2rem;}
+  .admin-sidebar button{
+    display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:13px 22px;
+    color:#D8C7BE;font-weight:600;font-size:.94rem;border-left:3px solid transparent;
+  }
+  .admin-sidebar button.active{background:rgba(255,255,255,.06);color:#fff;border-left-color:var(--rose);}
+  .admin-main{flex:1;padding:32px 36px;overflow-x:auto;}
+  .admin-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;}
+  table{width:100%;border-collapse:collapse;background:#fff;border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow-sm);}
+  th,td{padding:13px 16px;text-align:left;font-size:.9rem;border-bottom:1px solid var(--line);}
+  th{background:var(--cream-deep);font-weight:700;color:var(--plum-soft);font-size:.78rem;text-transform:uppercase;letter-spacing:.4px;}
+  .stat-box{background:#fff;border-radius:var(--r-md);padding:22px;box-shadow:var(--shadow-sm);}
+  .stat-box h4{font-size:1.7rem;}
+  .stat-box p{color:var(--plum-soft);font-size:.85rem;margin-top:4px;}
+</style>
+</head>
+<body>
+
+<div class="admin-shell">
+  <aside class="admin-sidebar">
+    <div class="logo"><span class="mark" style="display:inline-flex;width:30px;height:30px;border-radius:50%;background:var(--rose);align-items:center;justify-content:center;font-size:.8rem;margin-right:6px;">মম</span>Mamata Admin</div>
+    <button data-tab-btn="orders" class="active" onclick="switchTab('orders')">📦 অর্ডার ম্যানেজমেন্ট</button>
+    <button data-tab-btn="affiliates" onclick="switchTab('affiliates')">🤝 অ্যাফিলিয়েট</button>
+    <button data-tab-btn="analytics" onclick="switchTab('analytics')">📊 অ্যানালিটিক্স</button>
+    <button data-tab-btn="chat" onclick="switchTab('chat')">💬 চ্যাট</button>
+    <button onclick="handleLogout()" style="margin-top:20px;color:#F0AFAF;">🚪 লগআউট</button>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <h2 style="color:var(--plum);">ড্যাশবোর্ড</h2>
+      <div class="muted" id="adminEmail" style="font-size:.85rem;"></div>
+    </div>
+
+    <!-- ORDERS TAB -->
+    <div class="admin-tab" id="tab-orders">
+      <table>
+        <thead><tr><th>অর্ডার আইডি</th><th>কাস্টমার</th><th>আইটেম</th><th>মোট</th><th>রেফারার</th><th>স্ট্যাটাস</th></tr></thead>
+        <tbody id="ordersBody"></tbody>
+      </table>
+    </div>
+
+    <!-- AFFILIATES TAB -->
+    <div class="admin-tab" id="tab-affiliates" style="display:none;">
+      <table>
+        <thead><tr><th>ইউজারনেম</th><th>নাম</th><th>রেফারেল</th><th>মোট আয়</th><th>বকেয়া</th><th>কমিশন হার</th></tr></thead>
+        <tbody id="affiliatesBody"></tbody>
+      </table>
+    </div>
+
+    <!-- ANALYTICS TAB -->
+    <div class="admin-tab" id="tab-analytics" style="display:none;">
+      <div class="grid grid-4">
+        <div class="stat-box"><h4 id="statOrders">0</h4><p>মোট অর্ডার</p></div>
+        <div class="stat-box"><h4 id="statRevenue">৳0</h4><p>মোট আয়</p></div>
+        <div class="stat-box"><h4 id="statCustomers">0</h4><p>সক্রিয় কাস্টমার</p></div>
+        <div class="stat-box"><h4 id="statAffiliates">0</h4><p>অ্যাফিলিয়েট</p></div>
+      </div>
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:22px;margin-top:22px;">
+        <div class="stat-box">
+          <h4 style="font-size:1.1rem;margin-bottom:10px;">অর্ডার স্ট্যাটাস</h4>
+          <div id="statusBreakdown"></div>
+        </div>
+        <div class="stat-box">
+          <h4 style="font-size:1.1rem;margin-bottom:10px;">বকেয়া অ্যাফিলিয়েট পেআউট</h4>
+          <h3 id="statPending" style="color:var(--rose-dark);">৳0</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHAT TAB -->
+    <div class="admin-tab" id="tab-chat" style="display:none;">
+      <div style="display:grid;grid-template-columns:280px 1fr;gap:0;background:#fff;border-radius:var(--r-md);box-shadow:var(--shadow-sm);overflow:hidden;height:560px;">
+        <div id="chatThreadList" style="border-right:1px solid var(--line);overflow-y:auto;"></div>
+        <div id="chatAdminPanel" style="display:none;flex-direction:column;">
+          <div style="padding:14px 18px;border-bottom:1px solid var(--line);font-weight:700;" id="chatActiveName"></div>
+          <div id="chatAdminMessages" style="flex:1;overflow-y:auto;padding:16px;"></div>
+          <form onsubmit="sendAdminReply(event)" style="display:flex;gap:8px;padding:12px;border-top:1px solid var(--line);">
+            <input id="chatAdminInput" placeholder="রিপ্লাই লিখুন..." style="flex:1;padding:10px 14px;border:1px solid var(--line);border-radius:20px;">
+            <button class="btn btn-primary btn-sm" type="submit">পাঠান</button>
+          </form>
+        </div>
+        <div id="chatEmptyState" class="empty-state" style="grid-column:2;display:flex;align-items:center;justify-content:center;">একটি চ্যাট নির্বাচন করুন</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="../js/firebase-config.js"></script>
+<script src="../js/firebase-init.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/admin.js"></script>
+<script>
+  adminGuard(() => loadOrdersAdmin());
+
+  // Toggle chat empty-state vs panel
+  const chatPanelObserver = new MutationObserver(() => {
+    document.getElementById("chatEmptyState").style.display =
+      document.getElementById("chatAdminPanel").style.display === "flex" ? "none" : "flex";
+  });
+  chatPanelObserver.observe(document.getElementById("chatAdminPanel"), { attributes: true, attributeFilter: ["style"] });
+</script>
+</body>
+</html>

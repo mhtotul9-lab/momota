@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>অ্যাডমিন লগইন — Mamata (মমতা)</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--plum);">
+
+<div class="card" style="padding:36px;max-width:400px;width:100%;margin:20px;">
+  <div class="logo" style="justify-content:center;margin-bottom:20px;"><span class="mark">মম</span> Mamata Admin</div>
+  <form id="adminLoginForm">
+    <div class="field"><label>অ্যাডমিন ইমেইল</label><input id="adEmail" type="email" required placeholder="admin@mamata.app"></div>
+    <div class="field"><label>পাসওয়ার্ড</label><input id="adPassword" type="password" required placeholder="••••••••"></div>
+    <button class="btn btn-primary btn-block" id="adBtn" type="submit">অ্যাডমিন প্যানেলে প্রবেশ করুন</button>
+  </form>
+  <p class="muted center mt-16" style="font-size:.82rem;">শুধুমাত্র অনুমোদিত অ্যাডমিন ইমেইল দিয়ে প্রবেশ করা যাবে।</p>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="../js/firebase-config.js"></script>
+<script src="../js/firebase-init.js"></script>
+<script src="../js/app.js"></script>
+<script>
+  document.getElementById("adminLoginForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const email = document.getElementById("adEmail").value.trim();
+    const password = document.getElementById("adPassword").value;
+    const btn = document.getElementById("adBtn");
+    btn.disabled = true; btn.textContent = "যাচাই করা হচ্ছে...";
+
+    auth.signInWithEmailAndPassword(email, password)
+      .then(cred => {
+        if (!ADMIN_EMAILS.includes(cred.user.email)) {
+          auth.signOut();
+          toast("এই অ্যাকাউন্টটি অ্যাডমিন নয়।", "error");
+          btn.disabled = false; btn.textContent = "অ্যাডমিন প্যানেলে প্রবেশ করুন";
+          return;
+        }
+        window.location.href = "index.html";
+      })
+      .catch(err => {
+        toast("লগইন ব্যর্থ হয়েছে: " + err.message, "error");
+        btn.disabled = false; btn.textContent = "অ্যাডমিন প্যানেলে প্রবেশ করুন";
+      });
+  });
+</script>
+</body>
+</html>

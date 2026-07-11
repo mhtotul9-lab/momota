@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>কমিউনিটি — Mamata (মমতা)</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#C9707C">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="community">
+
+<div id="site-header"></div>
+
+<section class="section" style="padding-top:44px;">
+  <div class="container" style="max-width:760px;">
+    <div class="flex justify-between items-center" style="flex-wrap:wrap;gap:14px;">
+      <div>
+        <span class="tag">কমিউনিটি ফোরাম</span>
+        <h2>বাবা-মায়েদের একসাথে</h2>
+        <p class="muted">অভিজ্ঞতা শেয়ার করুন, প্রশ্ন করুন, একে অপরকে সাহায্য করুন।</p>
+      </div>
+      <button class="btn btn-primary" onclick="document.getElementById('postModal').classList.add('open')">✍️ পোস্ট করুন</button>
+    </div>
+
+    <div id="postList" class="mt-32"></div>
+  </div>
+</section>
+
+<!-- New post modal -->
+<div class="modal-overlay" id="postModal">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('postModal').classList.remove('open')">✕</button>
+    <h3 class="mt-8">নতুন পোস্ট</h3>
+    <form id="postForm" onsubmit="submitPost(event)" class="mt-16">
+      <div class="field"><label>শিরোনাম</label><input id="postTitle" required placeholder="যেমন: রাতে বাবু ঘুমাতে চায় না"></div>
+      <div class="field">
+        <label>ক্যাটাগরি</label>
+        <select id="postCategory">
+          <option value="general">সাধারণ</option>
+          <option value="feeding">খাওয়ানো</option>
+          <option value="sleep">ঘুম</option>
+          <option value="health">স্বাস্থ্য</option>
+          <option value="tips">টিপস</option>
+        </select>
+      </div>
+      <div class="field"><label>বিস্তারিত</label><textarea id="postBody" rows="4" required placeholder="আপনার প্রশ্ন বা অভিজ্ঞতা লিখুন..."></textarea></div>
+      <button class="btn btn-primary btn-block" type="submit">প্রকাশ করুন</button>
+    </form>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/firebase-init.js"></script>
+<script src="js/app.js"></script>
+<script src="js/chat.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/community.js"></script>
+</body>
+</html>

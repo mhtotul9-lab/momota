@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>আমার অ্যাকাউন্ট — Mamata (মমতা)</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#C9707C">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="account">
+
+<div id="site-header"></div>
+
+<section class="section" style="padding-top:44px;">
+  <div class="container" style="max-width:640px;">
+    <h2>আমার অ্যাকাউন্ট</h2>
+    <div class="card mt-24" style="padding:26px;">
+      <p><strong>নাম:</strong> <span data-user-name></span></p>
+      <p class="mt-8"><strong>ইমেইল:</strong> <span id="acctEmail"></span></p>
+      <div class="flex gap-10 mt-24">
+        <a href="affiliate.html" class="btn btn-outline">রেফারেল ড্যাশবোর্ড</a>
+        <button class="btn btn-primary" onclick="handleLogout()">লগআউট</button>
+      </div>
+    </div>
+
+    <h3 class="mt-32">আমার অর্ডারসমূহ</h3>
+    <div id="myOrders" class="mt-16"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/firebase-init.js"></script>
+<script src="js/app.js"></script>
+<script src="js/chat.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/auth.js"></script>
+<script>
+  auth.onAuthStateChanged(user => {
+    if (!user) { window.location.href = "login.html"; return; }
+    document.getElementById("acctEmail").textContent = user.email;
+    col.orders.where("userId", "==", user.uid).orderBy("createdAt", "desc").get().then(snap => {
+      const box = document.getElementById("myOrders");
+      if (snap.empty) { box.innerHTML = `<p class="muted">এখনো কোনো অর্ডার নেই।</p>`; return; }
+      box.innerHTML = snap.docs.map(d => {
+        const o = d.data();
+        return `<div class="card flex justify-between items-center" style="padding:16px 20px;margin-bottom:10px;">
+          <div><strong>#${d.id.slice(0,8)}</strong><div class="muted" style="font-size:.85rem;">${o.items.length} আইটেম</div></div>
+          <div class="flex items-center gap-10">
+            <strong>${bdt(o.total)}</strong>
+            <span class="pill ${o.status}">${o.status}</span>
+          </div>
+        </div>`;
+      }).join("");
+    });
+  });
+</script>
+</body>
+</html>

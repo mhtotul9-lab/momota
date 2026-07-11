@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/ref/:username", "destination": "/index.html?ref=:username" }
+  ]
+}
