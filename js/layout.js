@@ -13,7 +13,7 @@ function renderHeader() {
   <div class="topbar">✨ প্রথম অর্ডারে ফ্রি ডেলিভারি — কোড: <strong>MAMATA50</strong></div>
   <header class="site-header">
     <div class="container">
-      <a href="index.html" class="logo"><span class="mark">মম</span> Mamata</a>
+      <a href="index.html" class="logo"><img src="assets/logo-mark.svg" alt="" class="mark"> Mamata</a>
       <nav class="nav">
         ${link("index.html", "home", "হোম")}
         ${link("shop.html", "shop", "শপ")}
@@ -36,7 +36,7 @@ function renderFooter() {
     <div class="container">
       <div class="footer-grid">
         <div>
-          <a href="index.html" class="logo" style="color:#fff;margin-bottom:10px;"><span class="mark">মম</span> Mamata</a>
+          <a href="index.html" class="logo" style="color:#fff;margin-bottom:10px;"><img src="assets/logo-mark.svg" alt="" class="mark"> Mamata</a>
           <p style="color:#D8C7BE;font-size:.92rem;max-width:280px;">মমতা — বাংলাদেশের বাবা-মায়েদের জন্য যত্নশীল প্যারেন্টিং কমিউনিটি ও বেবি প্রোডাক্ট প্ল্যাটফর্ম।</p>
         </div>
         <div>

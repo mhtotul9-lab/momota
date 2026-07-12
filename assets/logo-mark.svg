@@ -1,0 +1,28 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="mamataGrad" x1="10" y1="10" x2="90" y2="95" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E39A87"/>
+      <stop offset="0.55" stop-color="#C9707C"/>
+      <stop offset="1" stop-color="#A85764"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Blooming heart: مমতা (tenderness) rendered as a soft, slightly asymmetric heart
+       with a sprout growing from its cleft — "nurture" + "bloom" in one mark -->
+  <path fill="url(#mamataGrad)" d="
+    M50,93
+    C24,74 4,54 3,32
+    C2,14 16,1 32,3
+    C41,4 47,10 50,20
+    C52,11 59,4 69,4
+    C86,3 99,17 97,34
+    C95,55 76,75 50,93
+    Z"/>
+
+  <!-- Sprout growing from the cleft -->
+  <g>
+    <path fill="#7E9470" d="M50,22 C46,15 47,7 52,1 C55,9 54,17 50,22 Z"/>
+    <path fill="#96A985" d="M50,22 C54,17 61,14 68,16 C64,23 57,26 50,22 Z"/>
+    <path fill="#96A985" d="M50,22 C46,17 39,14 32,16 C36,23 43,26 50,22 Z"/>
+  </g>
+</svg>

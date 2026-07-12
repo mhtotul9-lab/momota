@@ -1,0 +1,28 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E3A857"/>
+      <stop offset="0.5" stop-color="#D3897B"/>
+      <stop offset="1" stop-color="#C9707C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Organic blob backdrop (brand signature shape) -->
+  <path fill="url(#bgGrad)" d="
+    M50,3
+    C72,2 94,16 97,38
+    C100,58 90,78 70,90
+    C50,101 22,96 9,78
+    C-3,61 1,34 18,17
+    C28,7 39,4 50,3 Z"/>
+
+  <!-- Simplified blooming heart glyph, cream, reads clearly at small sizes -->
+  <path fill="#FBF5EC" d="
+    M50,78
+    C32,64 18,50 18,35
+    C18,23 27,15 38,17
+    C44,18 48,22 50,28
+    C52,22 56,18 62,17
+    C73,15 82,23 82,35
+    C82,50 68,64 50,78 Z"/>
+</svg>

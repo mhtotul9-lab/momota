@@ -11,12 +11,14 @@
 // ===========================================================
 
 const firebaseConfig = {
-  apiKey: "PASTE_YOUR_API_KEY",
-  authDomain: "PASTE_YOUR_PROJECT.firebaseapp.com",
-  projectId: "PASTE_YOUR_PROJECT_ID",
-  storageBucket: "PASTE_YOUR_PROJECT.appspot.com",
-  messagingSenderId: "PASTE_YOUR_SENDER_ID",
-  appId: "PASTE_YOUR_APP_ID"
+  apiKey: "AIzaSyAf2ztjFQ8-dVqqhwhZGPfvvxTAavFbzJY",
+  authDomain: "fyt-game.firebaseapp.com",
+  databaseURL: "https://fyt-game-default-rtdb.firebaseio.com",
+  projectId: "fyt-game",
+  storageBucket: "fyt-game.firebasestorage.app",
+  messagingSenderId: "701909288134",
+  appId: "1:701909288134:web:ecb27f3e90e602389c43c7",
+  measurementId: "G-GLBMVYTRPK"
 };
 
 // Admin emails allowed to access /admin panel (add your own admin login email(s))
