@@ -23,5 +23,5 @@ const firebaseConfig = {
 
 // Admin emails allowed to access /admin panel (add your own admin login email(s))
 const ADMIN_EMAILS = [
-  "admin@mamata.app"
+  "totul01744@gmail.com"
 ];
